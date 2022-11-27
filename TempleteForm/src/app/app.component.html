@@ -1,0 +1,69 @@
+<div  class="container head ">
+
+	<div style="margin: 30px">
+<h1 class="ion-text-center"><u>Templete driven form</u></h1>
+
+<form #loginForm="ngForm" >
+  <div class="form-group strong ">
+  <label>First name:</label>
+  <input class="box" type="text" name="firstname" placeholder="firstname" required minlength="5" #fname="ngModel" ngModel style="margin-left:40px" />
+  <div *ngIf="!fname?.valid && (fname?.dirty || fname?.touched)" class="text-danger"> 
+    <div *ngIf="fname.errors!['required']">
+    First Name Required</div>
+    <div *ngIf="fname.errors!['minlength']" >First Name required 5 characters</div>
+  </div>
+</div>
+  <br><br>
+  <div class="form-group strong">
+  <label >last name:</label>
+  <input class="box" pattern="[a-zA-Z ]*" type="lastname" name="lastname" #lastname="ngModel" placeholder="lastname" required ngModel style="margin-left:40px"/>
+  <div *ngIf="!lastname?.valid && (lastname?.dirty || lastname?.touched)" class="text-danger"> 
+    <div *ngIf="lastname.errors!['required']">
+    Last Name Required</div>
+    <div *ngIf="lastname.errors!['pattern']" >Should Alphabets only</div>
+  </div></div>
+  <br><br>
+  <div class="form-group strong">
+  <label>Age:</label>
+  <input class="box" type="number" name="age" placeholder="age" required #age="ngModel" ngModel style="margin-left:90px;"/>
+  <div *ngIf="!age?.valid && (age?.dirty || age?.touched)" class="text-danger"> 
+    <div *ngIf="age.errors!['required']">
+    Age Required</div></div></div>
+  <br><br>
+  <div class="form-group strong">
+  <label>Email address:</label>
+  <input class="box" required #email="ngModel" type="email" email ngModel name="useremail"/>
+  <div *ngIf="!email?.valid && (email?.dirty || email?.touched)" class="text-danger"> 
+    <div *ngIf="email.errors!['required']">
+    Email Required</div>
+    <div *ngIf="email.errors!['email']" >Email Must have @</div>
+  </div></div>
+  <br><br>
+  <div class="form-group strong">
+    <label>Password:</label>
+    <input class="box" type="text" name="password"  pattern="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$"  placeholder="Password"  required minlength="6"  ngModel #password="ngModel"  style="margin-left:55px"/>
+    <div *ngIf="!password?.valid && (password?.dirty || password?.touched)" class="text-danger"> 
+      <div *ngIf="password.errors!['required']">
+      Password Required</div>
+      <div *ngIf="password.errors!['minlength']">Password required 8 characters</div>
+      <div *ngIf="password.errors!['pattern']">Password required one (Special letters,uppercase,lowercase,number)</div>
+    </div></div>
+    <br><br>
+    <div class="form-group strong">
+    <label >Confirm Password:</label>
+    <input type="text" class="box"  name="ConfirmPassword" ngModel placeholder="ConfirmPassword" required pattern="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$" #ConfirmPassword="ngModel" minlength="6" style="margin-left:3px"/>     
+    <div class="text-danger" *ngIf="ConfirmPassword.value !== password.value">
+      Confirm password and Password should match
+  </div>
+  </div>
+  <br><br>
+  <label class="sty1" >Check Box : </label>
+  <span ><input type="checkbox" name="checkbox" class="sty" required ngModel  /><img src="https://iq.opengenus.org/content/images/2021/10/recaptchav2a.gif" class="length"></span>
+ <br><br>
+ <div class="form-group strong">
+  <input  type="submit" value="submit" class="btn btn-primary" (click)="loginUser(loginForm.value)" [disabled]="!loginForm.valid" style="padding: 30px 60px;margin-left: 150px;">
+</div>
+</form>
+</div>
+</div>
+
